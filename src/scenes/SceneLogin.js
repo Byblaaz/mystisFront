@@ -19,7 +19,7 @@ export default class SceneLogin extends BaseScene
 
     create(){
         // Background changement taille en fonction de l'écran
-        this.background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundLogin').setScale(0.9)
+        this.background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundLogin').setScale(0.75)
 
         this.buttonConnect = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 1.4, 'buttonConnect').setScale(0.15).setInteractive();
         this.buttonStart = this.add.sprite(this.cameras.main.width / 2, window.innerHeight / 1.4, 'buttonStart').setScale(0.15).setInteractive();

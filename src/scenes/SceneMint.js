@@ -10,7 +10,6 @@ export default class SceneMint extends BaseScene
         super('SceneMint')
     }
 
-
     preload(){
 
     }
@@ -65,7 +64,7 @@ export default class SceneMint extends BaseScene
         })
             .layout()
 
-        selectNbMint.on('button.click', function (button, index) {
+        selectNbMint.on('button.click',async function(button, index) {
                 if (index === 0 && nbMint > 1)
                     nbMint --
                 if (index === 2 && nbMint < 10)
@@ -77,6 +76,7 @@ export default class SceneMint extends BaseScene
 
                 if (index === 1 ) {
                     scene.ModalTxSuccess("transaction en cours \n tx : 0xokefoekf")
+                    //console.log(this.player)
 
                 }
             })

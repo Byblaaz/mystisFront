@@ -68,6 +68,7 @@ class BaseScene extends Phaser.Scene {
             .showMessage(message)
     }
 
+
 }
 
 export default BaseScene;

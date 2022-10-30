@@ -12,8 +12,8 @@ import TextTypingPlugin from "phaser3-rex-plugins/plugins/texttyping-plugin";
 
 function Game() {
     const game = new Phaser.Game({
-        width: 1600,
-        height: 900,
+        width: 1422,
+        height: 800,
         type: Phaser.AUTO,
         scale: {
             autoCenter: Phaser.Scale.CENTER_HORIZONTALLY

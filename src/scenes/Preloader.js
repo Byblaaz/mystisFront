@@ -21,9 +21,9 @@ class LoadingScreen extends Phaser.Scene {
         this.load.audio('titleBgMusic', ['./audio/mythologymusic.mp3']);
 
 
-        for (var i = 0; i < 150; i++) {
+       /* for (var i = 0; i < 150; i++) {
             this.load.image('test'+i, 'assets/imageNFT.png');
-        }
+        }*/
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -95,9 +95,10 @@ class LoadingScreen extends Phaser.Scene {
 
 
     create(){
+        console.log(this.cameras.main.width)
         // Changement de scene une fois le chargement terminé
-        this.add.image(window.innerWidth / 2, window.innerHeight / 2, 'logo').setScale(0.25)
-        this.buttonStart = this.add.sprite(window.innerWidth / 2, window.innerHeight / 1.4, 'buttonStart').setScale(0.15).setInteractive();
+        this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logo').setScale(0.25)
+        this.buttonStart = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 1.4, 'buttonStart').setScale(0.15).setInteractive();
 
         this.buttonStart.on('pointerover', () => {
             this.buttonStart.setScale(0.17);

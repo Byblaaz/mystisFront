@@ -14,8 +14,8 @@ export default class SceneHome extends BaseScene
 
     create(){
         // Background changement taille en fonction de l'écran
-        this.background = this.addImageToScene(window.innerWidth / 2, window.innerHeight / 2, 'backgroundHome', 0);
-        this.buttonMint = this.addSpriteToScene(window.innerWidth / 1.2, window.innerHeight / 1.2, 'buttonMint', 0.1);
+        this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
+        this.buttonMint = this.addSpriteToScene(this.cameras.main.width / 1.2, this.cameras.main.height / 1.2, 'buttonMint', 0.1);
 
 
         // liste de buttons afin d'appliquer des effets collectifs

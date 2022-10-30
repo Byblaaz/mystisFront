@@ -17,9 +17,9 @@ export default class SceneMint extends BaseScene
     create(){
         scene = this
         // Background changement taille en fonction de l'écran
-        this.background = this.addImageToScene(window.innerWidth / 2, window.innerHeight / 2, 'backgroundHome', 0);
-        this.buttonHome = this.addSpriteToScene(window.innerWidth / 50 , window.innerHeight / 20, 'homeButton', 0.3);
-        this.imageNFT = this.addImageToScene(window.innerWidth / 4, window.innerHeight / 2, 'imageNFT', 0.08);
+        this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
+        this.buttonHome = this.addSpriteToScene(this.cameras.main.width / 50 , this.cameras.main.height / 20, 'homeButton', 0.3);
+        this.imageNFT = this.addImageToScene(this.cameras.main.width / 4, this.cameras.main.height / 2, 'imageNFT', 0.08);
 
 
         // liste de buttons afin d'appliquer des effets collectifs
@@ -48,7 +48,7 @@ export default class SceneMint extends BaseScene
         });
 
         var selectNbMint = this.rexUI.add.buttons({
-            x: window.innerWidth / 4, y: window.innerHeight / 1.2,
+            x: this.cameras.main.width / 4, y: this.cameras.main.height / 1.2,
             width: 290,
             orientation: 'x',
 

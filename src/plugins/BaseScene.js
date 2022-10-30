@@ -45,7 +45,7 @@ class BaseScene extends Phaser.Scene {
 
         const COLOR_GREEN = 0x32a852;
         this.rexUI.add.toast({
-            x: window.innerWidth - 120,
+            x: this.cameras.main.width - 120,
             y: 50,
 
             background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_GREEN),

@@ -14,6 +14,7 @@ class Player extends Phaser.Plugins.BasePlugin {
         this.playerInfo = {
             name: '',
             address: null,
+            account: ''
         }
     }
     async loadWeb3() {
@@ -42,9 +43,11 @@ class Player extends Phaser.Plugins.BasePlugin {
             if (windowStarknet.selectedAddress) {
                 if (windowStarknet.chainId === "SN_GOERLI") {
 
+                    console.log( windowStarknet.account)
+                    this.playerInfo.account = windowStarknet.account
                     this.playerInfo.address = windowStarknet.selectedAddress
                     console.log("address starknet "+windowStarknet.selectedAddress)
-                    await this.getNft();
+                    await this.getNft(windowStarknet.selectedAddress);
 
                 } else {
                     alert("Invalid network, switch to Goerli and try again");
@@ -57,15 +60,15 @@ class Player extends Phaser.Plugins.BasePlugin {
         }
     }
 
-    getNft = async () => {
+    getNft = async (address) => {
 
         let blockchainNFT = [];
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const contract = new ethers.Contract(MystisAddress, mystisabi, provider);
+        const contract = new ethers.Contract(MystisAddress, mystisabi, this.playerInfo.account);
 
         try {
 
-            let nbNFTMint = Number(await contract.balanceOf(String(this.playerInfo.address), 21));
+            let nbNFTMint = Number(await contract.balanceOf(address, 21));
+            //let nbNFTMint = Number(await contract.balanceOf(address, 21));
             console.log(nbNFTMint)
         }
         catch (e) {

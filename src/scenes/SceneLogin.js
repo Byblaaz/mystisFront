@@ -43,9 +43,11 @@ export default class SceneLogin extends BaseScene
             if (this.player.playerInfo.address == null)
                 await this.loadData();
 
-            this.buttonStart.visible = true
-            this.buttonConnect.visible = false
-            //this.scene.start("SceneHome");
+            if (this.player.playerInfo.address != null) {
+                this.buttonStart.visible = true
+                this.buttonConnect.visible = false
+                //this.scene.start("SceneHome");
+            }
 
         });
 

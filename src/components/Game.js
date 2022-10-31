@@ -16,7 +16,7 @@ function Game() {
         height: 800,
         type: Phaser.AUTO,
         scale: {
-            autoCenter: Phaser.Scale.CENTER_HORIZONTALLY
+            autoCenter: Phaser.Scale.CENTER_BOTH
         },
         plugins: {
             global: [

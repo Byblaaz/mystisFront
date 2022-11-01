@@ -69,7 +69,7 @@ export default class SceneMint extends BaseScene
         })
             .layout()
 
-        this.selectNbMint.on('button.click', async (button, index) =>{
+        this.selectNbMint.on('button.click', async (button, index) => {
                 console.log(this.player)
                 if (index === 0 && nbMint > 1)
                     nbMint --

@@ -20,13 +20,13 @@ function Game() {
         },
         plugins: {
             global: [
-                { key: 'Player', plugin: Player, start: false, mapping: 'player'},
+                { key: 'Player', plugin: Player, start: true, mapping: 'player'},
                 { key: 'rexRoundRectanglePlugin',plugin: RoundRectanglePlugin,start: true },
                 { key: 'rexTextTyping', plugin: TextTypingPlugin, start: true }
             ],
             scene: [
                 { key: 'rexUI', plugin: UIPlugin, mapping: 'rexUI'}
-                ]
+            ]
         },
         scene: [
             LoadingScreen,

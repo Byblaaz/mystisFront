@@ -67,7 +67,7 @@ export default class SceneLogin extends BaseScene
             //this.soundLogin.destroy();
             //game.cache.removeSound('wizball');
             this.sound.stopByKey('titleBgMusic');
-            this.scene.start("SceneHome")
+            this.scene.start("SceneHome");
         });
 
     }

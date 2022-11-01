@@ -115,6 +115,7 @@ class LoadingScreen extends Phaser.Scene {
         this.buttonStart.on('pointerdown', async () => {
             this.soundLogin = this.sound.play('titleBgMusic', {loop: true, volume:0.2});
             this.scene.start("SceneLogin");
+            //this.scene.start("SceneHome");
         });
         // ajouter bouton join the battle
 

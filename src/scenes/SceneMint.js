@@ -9,7 +9,10 @@ export default class SceneMint extends BaseScene
     constructor(){
         super('SceneMint')
     }
-
+    loadData = async () => {
+        // Load Data from blockchain
+        await this.player.getNft()
+    }
     preload(){
 
     }
@@ -20,6 +23,7 @@ export default class SceneMint extends BaseScene
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
         this.buttonHome = this.addSpriteToScene(this.cameras.main.width / 50 , this.cameras.main.height / 20, 'homeButton', 0.3);
         this.imageNFT = this.addImageToScene(this.cameras.main.width / 4, this.cameras.main.height / 2, 'imageNFT', 0.08);
+        this.buttonMint = this.addSpriteToScene(this.cameras.main.width / 1.2, this.cameras.main.height / 1.2, 'buttonMint', 0.1);
 
 
         // liste de buttons afin d'appliquer des effets collectifs
@@ -45,9 +49,10 @@ export default class SceneMint extends BaseScene
 
         this.buttonHome.on('pointerdown', async () => {
             this.scene.start("SceneHome");
+
         });
 
-        var selectNbMint = this.rexUI.add.buttons({
+        this.selectNbMint = this.rexUI.add.buttons({
             x: this.cameras.main.width / 4, y: this.cameras.main.height / 1.2,
             width: 290,
             orientation: 'x',
@@ -64,26 +69,34 @@ export default class SceneMint extends BaseScene
         })
             .layout()
 
-        selectNbMint.on('button.click',async function(button, index) {
+        this.selectNbMint.on('button.click', async (button, index) => {
+                console.log(this.player)
                 if (index === 0 && nbMint > 1)
                     nbMint --
                 if (index === 2 && nbMint < 10)
                     nbMint ++
 
                 // récupère le bouton du milieu pour changer le texte
-                var buttonNombre = selectNbMint.getButton(1);
-                buttonNombre.text = nbMint
+                // var buttonNombre = this.selectNbMint.getButton(1);
+                // buttonNombre.text = nbMint
 
                 if (index === 1 ) {
+                    await this.loadData();
                     scene.ModalTxSuccess("transaction en cours \n tx : 0xokefoekf")
                     //console.log(this.player)
 
                 }
             })
 
+            this.buttonMint.on('pointerdown', async () => {
+                console.log(this.player)
+            });
+
     }
 
-    update() { }
+    update() { 
+        
+    }
 }
 
 var createButton = function (scene, text, width) {

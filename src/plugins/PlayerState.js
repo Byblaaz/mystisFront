@@ -1,9 +1,10 @@
 import Phaser from 'phaser';
 import { ethers } from "ethers";
 import { connect } from "@argent/get-starknet"
+import {Contract} from 'starknet';
 
 import mystisabi from "../abi/mystisabi.json"
-const MystisAddress = "0x97A570127a51a5b9d24D76404c8B140238891bdF"
+const MystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf8972faa35"
 
 class Player extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -14,6 +15,7 @@ class Player extends Phaser.Plugins.BasePlugin {
         this.playerInfo = {
             name: '',
             address: null,
+            account: ''
         }
     }
     async loadWeb3() {
@@ -37,14 +39,14 @@ class Player extends Phaser.Plugins.BasePlugin {
         try {
             const windowStarknet = await connect()
             await windowStarknet?.enable({ starknetVersion: "v4" })
-
-            console.log(windowStarknet.chai)
             if (windowStarknet.selectedAddress) {
                 if (windowStarknet.chainId === "SN_GOERLI") {
 
+                    console.log( windowStarknet.account)
+                    this.playerInfo.account = windowStarknet.account
                     this.playerInfo.address = windowStarknet.selectedAddress
                     console.log("address starknet "+windowStarknet.selectedAddress)
-                    await this.getNft();
+                    await this.getNft(windowStarknet.selectedAddress);
 
                 } else {
                     alert("Invalid network, switch to Goerli and try again");
@@ -57,15 +59,15 @@ class Player extends Phaser.Plugins.BasePlugin {
         }
     }
 
-    getNft = async () => {
+    getNft = async (address) => {
 
         let blockchainNFT = [];
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const contract = new ethers.Contract(MystisAddress, mystisabi, provider);
-
+        const contract = new Contract(mystisabi, MystisAddress, this.playerInfo.account);
+        console.log(contract)
         try {
 
-            let nbNFTMint = Number(await contract.balanceOf(String(this.playerInfo.address), 21));
+            let nbNFTMint = await contract.balanceOf(address);
+            //let nbNFTMint = Number(await contract.balanceOf(address, 21));
             console.log(nbNFTMint)
         }
         catch (e) {

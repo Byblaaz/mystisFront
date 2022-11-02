@@ -30,6 +30,11 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('home-btnSummon', 'assets/home/summon.png');
 
 
+        // Buttons Home
+        this.load.image('home-btnArena', 'assets/home/arena.png');
+        this.load.image('home-btnSummon', 'assets/home/summon.png');
+
+
         // Audio
         this.load.audio('titleBgMusic', ['./audio/mythologymusic.mp3']);
 

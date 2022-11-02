@@ -98,15 +98,8 @@ class LoadingScreen extends Phaser.Scene {
         console.log(this.cameras.main.width)
         // Changement de scene une fois le chargement terminé
         this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logo').setScale(0.3)
-        this.buttonStart = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 1.4, 'buttonStart').setScale(0.15).setInteractive();
+        this.buttonStart = this.add.text(this.cameras.main.width / 2.3, this.cameras.main.height / 1.4, 'Join the battle...').setScale(1.2).setInteractive();
 
-        this.buttonStart.on('pointerover', () => {
-            this.buttonStart.setScale(0.17);
-        });
-
-        this.buttonStart.on('pointerout', () => {
-            this.buttonStart.setScale(0.15);
-        });
 
         this.buttonStart.on('pointerup', () => {
             this.buttonStart.setAlpha(1);

@@ -10,12 +10,17 @@ class LoadingScreen extends Phaser.Scene {
         // Chargement des images avant le lancement de l'application
         this.load.image('logo', 'assets/logoSansFond1.png');
         this.load.image('backgroundLogin', 'assets/backgroundLogin.png');
-        this.load.image('backgroundHome', 'assets/background.jpeg');
+        this.load.image('backgroundHome', 'assets/home/backgroundHome.png');
         this.load.image('buttonMint', 'assets/brown.png');
         this.load.image('homeButton', 'assets/home.png');
         this.load.image('imageNFT', 'assets/imageNFT.png');
         this.load.image('buttonStart', 'assets/start.png');
         this.load.image('buttonConnect', 'assets/connect.png');
+
+        // Buttons Home
+        this.load.image('home-btnArena', 'assets/home/arena.png');
+        this.load.image('home-btnSummon', 'assets/home/summon.png');
+
 
         // Audio
         this.load.audio('titleBgMusic', ['./audio/mythologymusic.mp3']);

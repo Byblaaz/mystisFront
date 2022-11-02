@@ -66,7 +66,7 @@ class Player extends Phaser.Plugins.BasePlugin {
         console.log(contract)
         try {
 
-            let nbNFTMint = await contract.balanceOf(address);
+            let nbNFTMint = await contract.balanceOf(this.playerInfo.address);
             //let nbNFTMint = Number(await contract.balanceOf(address, 21));
             console.log(nbNFTMint)
         }

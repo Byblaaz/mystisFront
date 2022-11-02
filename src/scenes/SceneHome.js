@@ -15,12 +15,15 @@ export default class SceneHome extends BaseScene
     create(){
         // Background changement taille en fonction de l'écran
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
-        this.buttonMint = this.addSpriteToScene(this.cameras.main.width / 1.2, this.cameras.main.height / 1.2, 'buttonMint', 0.1);
+        this.buttonMint = this.add.sprite(this.cameras.main.width / 5, this.cameras.main.height / 1.6, 'home-btnSummon').setInteractive();
+        this.buttonArena = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
+
 
 
         // liste de buttons afin d'appliquer des effets collectifs
         const buttons = [
             this.buttonMint,
+            this.buttonArena
         ];
 
         buttons.forEach(button => {

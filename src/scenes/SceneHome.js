@@ -46,7 +46,6 @@ export default class SceneHome extends BaseScene
 
 
         this.buttonMint.on('pointerdown', async () => {
-            console.log(this.player)
             this.scene.start("SceneMint");
         });
 

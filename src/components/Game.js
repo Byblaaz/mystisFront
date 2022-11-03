@@ -40,17 +40,24 @@ function Game() {
 
     function preload(){
         console.log(window)
-        this.load.setPath('assets/spine/');
-        this.load.spine('spineboy', 'spineboy.json', 'spineboy.atlas', true);
+        this.load.setPath('assets/brigand/');
+        this.load.spine('player', 'brigand.json', 'brigand.atlas', true);
 
     }
 
     function create(){
 
         console.log("erreur 3")
-        var boy = this.add.spine(600, 600, 'spineboy', 'idle', 3,3, true);
-        console.log("eereur 4")
-        console.log(boy.getBounds());
+        //var boy = this.add.spine(600, 600, 'player', 'idle', true).ToScale(0.5);
+
+        let boy1 = this.make.spine({
+            x: 512, y: 550, key: 'player',
+            scale: 0.5,
+            skinName: 'default',
+            animationName: 'idle', loop: true,
+            slotName: 'tete', attachmentName: 'tete'
+        });
+        console.log(boy1.getBounds());
 
 
 

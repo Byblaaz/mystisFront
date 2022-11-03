@@ -13,10 +13,12 @@ export default class SceneHome extends BaseScene
     }
 
     create(){
-        // Background changement taille en fonction de l'écran
+       // Affichage des images
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
         this.buttonMint = this.add.sprite(this.cameras.main.width / 5, this.cameras.main.height / 1.6, 'home-btnSummon').setInteractive();
         this.buttonArena = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
+        this.shader = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'nuageShader', 0);
+
 
 
 
@@ -44,7 +46,6 @@ export default class SceneHome extends BaseScene
 
 
         this.buttonMint.on('pointerdown', async () => {
-            console.log(this.player)
             this.scene.start("SceneMint");
         });
 

@@ -16,6 +16,7 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('imageNFT', 'assets/imageNFT.png');
         this.load.image('buttonStart', 'assets/start.png');
         this.load.image('buttonConnect', 'assets/connect.png');
+        this.load.image('nuageShader', 'assets/nuage.png');
 
         // Buttons Home
         this.load.image('home-btnArena', 'assets/home/arena.png');

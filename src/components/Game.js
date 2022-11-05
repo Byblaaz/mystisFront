@@ -42,6 +42,9 @@ function Game() {
             TutorialScreen
         ],
         parent: 'game-content',
+        dom: {
+            createContainer: true
+        },
     });
 
     return  <div id="game-content" />

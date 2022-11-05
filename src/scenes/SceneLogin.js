@@ -1,4 +1,5 @@
 import BaseScene from '../plugins/BaseScene';
+import { doc, setDoc,updateDoc } from "firebase/firestore";
 
 export default class SceneLogin extends BaseScene
 {
@@ -67,7 +68,19 @@ export default class SceneLogin extends BaseScene
             //this.soundLogin.destroy();
             //game.cache.removeSound('wizball');
             this.sound.stopByKey('titleBgMusic');
-            this.scene.start("SceneHome");
+            if(this.player.playerInfo.address && this.player.playerInfo.isFirstTime){
+                console.log(this.player.playerInfo.address)
+                this.player.playerInfo.dateJoined = new Date();
+                // this.player.playerInfo.isFirstTime = false;
+                // await setDoc(doc(this.player.users, this.player.playerInfo.address), this.player.playerInfo);
+                this.scene.start("TutorialScreen"); // si isFristTime , on start tutorial
+            }else{
+                this.player.playerInfo.lastLogin = new Date();
+                // this.player.users fais référence à la collection (this.users = collection(this.db, 'users');) dans notre plugin PlayerState
+                await updateDoc(doc(this.player.users, this.player.playerInfo.address),{ lastLogin : this.player.playerInfo.lastLogin });
+                this.scene.start("SceneHome");
+            }
+            
         });
 
     }

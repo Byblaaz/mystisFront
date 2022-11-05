@@ -6,27 +6,57 @@ class TutorialScreen extends BaseScene {
         super('TutorialScreen')
     }
 
+     preload () {
+         this.load.html('nameform', 'assets/text/loginform.html');
+    }
+
     create(){
+
         this.buttonMint = this.addSpriteToScene(this.cameras.main.width / 1.2, this.cameras.main.height / 1.2, 'buttonMint', 0.1);
 
-        this.inputName = '';
-        this.inputText = this.add.rexInputText(
-            this.cameras.main.width/2,
-            this.cameras.main.height/1.4,
-            300,
-            40,
-            { 
-                type: "text",
-                maxLength: 15,
-                fontSize : "25px",
-                minLength: 3,
-                backgroundColor : "white",
-                color: "white"
+        var element = this.add.dom(this.cameras.main.width / 2, this.cameras.main.height / 2,).createFromCache('nameform');
+        element.addListener('click');
+        element.on('click', function (event) {
+
+            console.log(event.target)
+            if (event.target.name === 'EnterButton')
+            {
+                var inputUsername = this.getChildByName('username');
+
+                //  Have they entered anything?
+                if (inputUsername.value !== '')
+                {
+                    //  Turn off the click events
+                    this.removeListener('click');
+
+                    //  Tween the username form out
+                    this.scene.tweens.add({ targets: element.rotate3d, x: 1, w: 90, duration: 1000, ease: 'Power3',
+                        onComplete: function ()
+                        {
+                            element.setVisible(false);
+                        }});
+
+                    // TODO enregistrement en base
+                    console.log(inputUsername.value)
+                }
+                else
+                {
+                    //  Flash the prompt
+                    this.scene.tweens.add({ targets: element, alpha: 0.8, duration: 200, ease: 'Power3', yoyo: true });
+                }
             }
-        ).setOrigin(0,1)
-        .on('textchange', inputText => {
-            this.inputName = inputText.text;
-        })
+
+        });
+
+        // animatio to display modal Username
+        this.tweens.add({
+            targets: element,
+            y: 300,
+            duration: 3000,
+            ease: 'Power3'
+        });
+
+
 
     }
 

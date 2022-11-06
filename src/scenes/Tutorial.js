@@ -1,51 +1,53 @@
 import Phaser from 'phaser';
 import BaseScene from '../plugins/BaseScene';
+import { doc, setDoc } from "firebase/firestore";
 
 class TutorialScreen extends BaseScene {
-    constructor(){
+    constructor() {
         super('TutorialScreen')
     }
 
-     preload () {
-         this.load.html('nameform', 'assets/text/loginform.html');
+    preload() {
+        this.load.html('nameform', 'assets/text/loginform.html');
+        console.log(this.player.playerInfo)
     }
 
-    create(){
+    create() {
 
         this.buttonMint = this.addSpriteToScene(this.cameras.main.width / 1.2, this.cameras.main.height / 1.2, 'buttonMint', 0.1);
 
         var element = this.add.dom(this.cameras.main.width / 2, this.cameras.main.height / 2,).createFromCache('nameform');
         element.addListener('click');
-        element.on('click', function (event) {
-
+        element.on('click', async function (event) {
+            console.log(this)
             console.log(event.target)
-            if (event.target.name === 'EnterButton')
-            {
+            if (event.target.name === 'EnterButton') {
                 var inputUsername = this.getChildByName('username');
 
-                //  Have they entered anything?
-                if (inputUsername.value !== '')
-                {
+                //  TODO Add regex 
+                if (inputUsername.value !== '' && inputUsername.value.length > 3 && inputUsername.value.length < 10) {
                     //  Turn off the click events
                     this.removeListener('click');
 
                     //  Tween the username form out
-                    this.scene.tweens.add({ targets: element.rotate3d, x: 1, w: 90, duration: 1000, ease: 'Power3',
-                        onComplete: function ()
-                        {
+                    this.scene.tweens.add({
+                        targets: element.rotate3d, x: 1, w: 90, duration: 1000, ease: 'Power3',
+                        onComplete: function () {
                             element.setVisible(false);
-                        }});
-
+                        }
+                    });
+                    
                     // TODO enregistrement en base
-                    console.log(inputUsername.value)
+                    this.scene.player.playerInfo.isFirstTime = false;
+                    this.scene.player.playerInfo.name = inputUsername.value;
+                    await setDoc(doc(this.scene.player.users, this.scene.player.playerInfo.address), this.scene.player.playerInfo);
+                    this.scene.scene.start("SceneHome"); // si isFristTime , on start tutorial
                 }
-                else
-                {
+                else {
                     //  Flash the prompt
                     this.scene.tweens.add({ targets: element, alpha: 0.8, duration: 200, ease: 'Power3', yoyo: true });
                 }
             }
-
         });
 
         // animatio to display modal Username
@@ -60,7 +62,7 @@ class TutorialScreen extends BaseScene {
 
     }
 
-    update(){
+    update() {
     }
 }
 

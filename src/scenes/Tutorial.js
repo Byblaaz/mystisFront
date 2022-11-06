@@ -37,7 +37,6 @@ class TutorialScreen extends BaseScene {
                         }
                     });
                     
-                    // TODO enregistrement en base
                     this.scene.player.playerInfo.isFirstTime = false;
                     this.scene.player.playerInfo.name = inputUsername.value;
                     await setDoc(doc(this.scene.player.users, this.scene.player.playerInfo.address), this.scene.player.playerInfo);

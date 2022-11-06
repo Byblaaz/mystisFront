@@ -1,187 +1,243 @@
 
 brigand.png
-size: 942,1039
+size: 1209,1063
 format: RGBA8888
 filter: Linear,Linear
 repeat: none
 arme
   rotate: true
-  xy: 191, 923
+  xy: 191, 947
   size: 114, 631
   orig: 117, 633
   offset: 2, 1
   index: -1
 arme entiere
   rotate: true
-  xy: 191, 807
+  xy: 191, 831
   size: 114, 631
   orig: 117, 633
   offset: 2, 1
   index: -1
 arme haute
   rotate: false
-  xy: 2, 419
+  xy: 2, 443
   size: 187, 618
   orig: 190, 620
   offset: 2, 1
   index: -1
 avant bras droit
   rotate: false
-  xy: 2, 2
+  xy: 852, 4
   size: 164, 113
   orig: 168, 115
   offset: 2, 1
   index: -1
 avant bras gauche
-  rotate: true
-  xy: 824, 809
+  rotate: false
+  xy: 622, 109
   size: 228, 93
   orig: 228, 93
   offset: 0, 0
   index: -1
 bras droit
-  rotate: false
-  xy: 770, 171
+  rotate: true
+  xy: 458, 211
   size: 162, 168
   orig: 172, 177
   offset: 7, 9
   index: -1
 bras gauche
-  rotate: true
-  xy: 168, 22
+  rotate: false
+  xy: 1069, 865
   size: 111, 196
   orig: 111, 196
   offset: 0, 0
   index: -1
 buste
   rotate: false
-  xy: 191, 484
+  xy: 191, 508
   size: 251, 321
   orig: 251, 321
   offset: 0, 0
   index: -1
 ceinture
-  rotate: true
-  xy: 786, 639
+  rotate: false
+  xy: 454, 130
   size: 166, 79
   orig: 166, 79
   offset: 0, 0
   index: -1
 hanche
   rotate: true
-  xy: 620, 537
+  xy: 671, 561
   size: 268, 164
   orig: 268, 164
   offset: 0, 0
   index: -1
 jambe droite
   rotate: true
-  xy: 384, 125
+  xy: 663, 330
   size: 229, 179
   orig: 229, 179
   offset: 0, 0
   index: -1
+jambe droite_blue
+  rotate: true
+  xy: 844, 340
+  size: 226, 176
+  orig: 229, 179
+  offset: 1, 1
+  index: -1
+jambe droite_leather
+  rotate: true
+  xy: 1022, 378
+  size: 226, 176
+  orig: 229, 179
+  offset: 1, 1
+  index: -1
 jambe gauche
   rotate: true
-  xy: 191, 356
+  xy: 2, 13
   size: 126, 270
   orig: 126, 270
   offset: 0, 0
   index: -1
+jambe gauche_blue
+  rotate: false
+  xy: 332, 238
+  size: 124, 268
+  orig: 126, 270
+  offset: 1, 1
+  index: -1
+jambe gauche_leather
+  rotate: true
+  xy: 628, 204
+  size: 124, 268
+  orig: 126, 270
+  offset: 1, 1
+  index: -1
 machoire
   rotate: false
-  xy: 867, 684
+  xy: 1115, 253
   size: 73, 123
   orig: 75, 125
   offset: 1, 1
   index: -1
 main droite
   rotate: true
-  xy: 550, 34
+  xy: 1115, 162
   size: 89, 83
   orig: 92, 86
   offset: 1, 2
   index: -1
 main gauche
-  rotate: true
-  xy: 805, 405
+  rotate: false
+  xy: 617, 23
   size: 132, 84
   orig: 132, 84
   offset: 0, 0
   index: -1
 mollet droit
   rotate: false
-  xy: 2, 117
+  xy: 2, 141
+  size: 163, 300
+  orig: 166, 302
+  offset: 1, 1
+  index: -1
+mollet droit_leather
+  rotate: false
+  xy: 2, 141
+  size: 163, 300
+  orig: 166, 302
+  offset: 1, 1
+  index: -1
+mollet droit_blue
+  rotate: false
+  xy: 167, 141
   size: 163, 300
   orig: 166, 302
   offset: 1, 1
   index: -1
 mollet gauche
-  rotate: false
-  xy: 575, 341
+  rotate: true
+  xy: 1013, 606
   size: 228, 194
   orig: 228, 249
   offset: 0, 55
   index: -1
+mollet gauche_blue
+  rotate: false
+  xy: 444, 586
+  size: 225, 243
+  orig: 228, 249
+  offset: 2, 4
+  index: -1
+mollet gauche_leather
+  rotate: true
+  xy: 824, 836
+  size: 225, 243
+  orig: 228, 249
+  offset: 2, 4
+  index: -1
 pied droit
   rotate: false
-  xy: 366, 18
+  xy: 274, 2
   size: 182, 105
   orig: 182, 105
   offset: 0, 0
   index: -1
 pied gauche
   rotate: false
-  xy: 770, 73
+  xy: 332, 140
   size: 120, 96
   orig: 123, 99
   offset: 2, 2
   index: -1
 sacoche
-  rotate: true
-  xy: 786, 539
+  rotate: false
+  xy: 751, 12
   size: 98, 95
   orig: 98, 95
   offset: 0, 0
   index: -1
 tete
   rotate: false
-  xy: 565, 130
+  xy: 458, 375
   size: 203, 209
   orig: 303, 313
   offset: 50, 52
   index: -1
 tete_capuche
   rotate: false
-  xy: 167, 135
+  xy: 898, 119
   size: 215, 219
   orig: 303, 313
   offset: 40, 27
   index: -1
 tissu buste
   rotate: false
-  xy: 444, 539
+  xy: 837, 568
   size: 174, 266
   orig: 174, 266
   offset: 0, 0
   index: -1
 tissu jambe gauche
-  rotate: false
-  xy: 463, 380
+  rotate: true
+  xy: 458, 18
   size: 110, 157
   orig: 110, 157
   offset: 0, 0
   index: -1
 yeux
   rotate: false
-  xy: 635, 46
+  xy: 1018, 35
   size: 60, 82
   orig: 62, 84
   offset: 1, 1
   index: -1
 yeux fermé
   rotate: true
-  xy: 805, 343
+  xy: 191, 446
   size: 60, 83
   orig: 62, 84
   offset: 1, 1

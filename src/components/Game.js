@@ -5,11 +5,13 @@ import LoadingScreen from "../scenes/Preloader";
 import SceneMint from "../scenes/SceneMint";
 import UIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import SceneLogin from "../scenes/SceneLogin";
+import SceneInventory from "../scenes/SceneInventory";
 import Player from '../plugins/PlayerState';
 import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plugin";
 import TextTypingPlugin from "phaser3-rex-plugins/plugins/texttyping-plugin";
 import SceneTest from "../scenes/SceneTest";
 import 'phaser/plugins/spine/dist/SpinePlugin.min.js'
+import CircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin";
 
 
 function Game() {
@@ -24,7 +26,8 @@ function Game() {
             global: [
                 { key: 'Player', plugin: Player, start: true, mapping: 'player'},
                 { key: 'rexRoundRectanglePlugin',plugin: RoundRectanglePlugin,start: true },
-                { key: 'rexTextTyping', plugin: TextTypingPlugin, start: true }
+                { key: 'rexTextTyping', plugin: TextTypingPlugin, start: true },
+                { key: 'rexCircleMaskImagePlugin', plugin: CircleMaskImagePlugin, start: true},
             ],
             scene: [
                 { key: 'rexUI', plugin: UIPlugin, mapping: 'rexUI'},
@@ -38,70 +41,43 @@ function Game() {
         parent: 'game-content',
     });
 
+    game.scene.add("SceneInventory", SceneInventory);
+
     function preload(){
-        this.load.setPath('assets/brigand/');
+        this.load.image('backgroundHome', 'assets/background.jpeg');
+        this.load.image('buttonMint', 'assets/brown.png');
         this.load.image('homeButton', 'assets/home.png');
-
-        this.load.spine('player', 'brigand.json', 'brigand.atlas', true);
-
+        this.load.image('imageNFT', 'assets/imageNFT.png');
+        this.load.image('avatar', 'assets/avatar.png');
     }
 
     function create(){
 
-        this.buttonHome = this.add.sprite(this.cameras.main.width / 50 , this.cameras.main.height / 20, 'homeButton').setScale(0.3).setInteractive();
-
-        //var boy = this.add.spine(600, 600, 'player', 'idle', true).ToScale(0.5);
-
-        let boy1 = this.make.spine({
-            x: 512, y: 550, key: 'player',
-            scale: 0.5,
-            skinName: 'default',
-            animationName: 'idle', loop: true,
-            slotName: 'tete', attachmentName: 'tete_capuche',
-            // tete {tete_1,tete2,}
-        });
-
-        const attachementsPantalon = ['jambe droite_', 'jambe gauche_', 'mollet droit_', 'mollet gauche_']
+        // Background changement taille en fonction de l'écran
+        this.background = this.add.image(this.cameras.main.width / 2 , this.cameras.main.height / 2, 'backgroundHome')
 
 
-
-        const getAttachments = (spine) => {
-            return spine.skeleton.skin.attachments
-        }
-        const setAttachment = (spine, slotName, attachmentName) => {
-            spine.skeleton.setAttachment(slotName, attachmentName)
-        }
-
-        console.log(getAttachments(boy1));
-
-        let listeChangeAttachement = [];
-        console.log(listeChangeAttachement.length)
-        if (listeChangeAttachement.length == 0) {
-            const trait = "pantalon_blue"
-            var attribut = trait.split("_")[1]
-            console.log(attribut)
-            for (const item in attachementsPantalon) {
-                console.log(item)
-                listeChangeAttachement.push(String(attachementsPantalon[item]+attribut))
-                console.log(attachementsPantalon[item].slice(0, -1))
-                setAttachment(boy1, String(attachementsPantalon[item].slice(0, -1)), String(attachementsPantalon[item]+attribut))
-            }
-            console.log(listeChangeAttachement)
-            setAttachment(boy1, "tete", "tete")
-            //setAttachment(boy1, "tete", "tete")
-
-            //this.sound.play('hoverEffect', { loop: false });
-        }
-
-        this.buttonHome.on('pointerover', () => {
-
-
-        });
+        //TODO Test
+        //Details Box
+        //this.cameras.main.width / 2
+        const overlayPlayer = this.add.rectangle(215, 60, 300, 70, 0x999999, 0.9)
+        const circle = this.add.circle(60, 60, 50, 0x999999, 0.9)
+        this.add.rexCircleMaskImage(60, 60, 'avatar').setScale(0.1);
+        this.detailsText = this.add.text(120, 60,
+            'Byblaaz',
+            {fontFamily: 'Arial', align: 'justify', fontSize: '20px'})
+        this.eloText = this.add.text(120, 35,
+            'Elo',
+            {fontFamily: 'Arial', align: 'justify', fontSize: '20px'})
+        this.eloValue = this.add.text(155, 35,
+            '1025',
+            {fontFamily: 'Arial', align: 'justify', fontSize: '20px'})
 
     }
 
 
     return  <div id="game-content" />
+
 
 };
 

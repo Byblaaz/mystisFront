@@ -45,6 +45,13 @@ export default class SceneHome extends BaseScene
             this.scene.start("SceneMint");
         });
 
+        const overlayPlayer = this.add.rectangle(215, 60, 300, 70, 0x999999, 0.9)
+        const circleAvatar = this.add.circle(60, 60, 50, 0x999999, 0.9)
+        this.add.rexCircleMaskImage(60, 60, 'avatar').setScale(0.1);
+        this.overlayPlayerName = this.add.text(120, 60,
+            this.player.playerInfo.name,
+            {fontFamily: 'Arial', align: 'justify', fontSize: '20px'})
+
 
 
 

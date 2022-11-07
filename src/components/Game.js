@@ -12,6 +12,7 @@ import Player from '../plugins/PlayerState';
 import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plugin";
 import TextTypingPlugin from "phaser3-rex-plugins/plugins/texttyping-plugin";
 import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
+import CircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin";
 
 
 function Game() {
@@ -28,6 +29,7 @@ function Game() {
                 { key: 'rexRoundRectanglePlugin',plugin: RoundRectanglePlugin,start: true },
                 { key: 'rexTextTyping', plugin: TextTypingPlugin, start: true },
                 { key: 'rexInputTextPlugin', plugin: InputTextPlugin, start: true },
+                { key: 'rexCircleMaskImagePlugin', plugin: CircleMaskImagePlugin, start: true},
 
             ],
             scene: [

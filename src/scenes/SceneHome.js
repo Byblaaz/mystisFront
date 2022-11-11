@@ -19,13 +19,17 @@ export default class SceneHome extends BaseScene
         this.buttonArena = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
         this.shader = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'nuageShader', 0);
 
+        this.team = this.add.circle(1322, 730, 45, 0x999999).setInteractive();
+        this.teamText = this.add.text(1312, 705, this.player.playerInfo.countNFT,{fontFamily: 'Arial', align: 'justify', fontSize: '40px', color: '0x000000'});
+
 
 
 
         // liste de buttons afin d'appliquer des effets collectifs
         const buttons = [
             this.buttonMint,
-            this.buttonArena
+            this.buttonArena,
+            this.team
         ];
 
         buttons.forEach(button => {
@@ -47,6 +51,10 @@ export default class SceneHome extends BaseScene
 
         this.buttonMint.on('pointerdown', async () => {
             this.scene.start("SceneMint");
+        });
+
+        this.team.on('pointerdown', async () => {
+            this.scene.start("SceneInventory");
         });
 
         const overlayPlayer = this.add.rectangle(215, 60, 300, 70, 0x999999, 0.9)

@@ -13,6 +13,7 @@ import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plu
 import TextTypingPlugin from "phaser3-rex-plugins/plugins/texttyping-plugin";
 import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
 import CircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin";
+import SceneInventory from "../scenes/SceneInventory";
 
 
 function Game() {
@@ -41,7 +42,8 @@ function Game() {
             SceneLogin,
             SceneHome,
             SceneMint,
-            TutorialScreen
+            TutorialScreen,
+            SceneInventory
         ],
         parent: 'game-content',
         dom: {

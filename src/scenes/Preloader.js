@@ -16,8 +16,12 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('imageNFT', 'assets/imageNFT.png');
         this.load.image('buttonStart', 'assets/start.png');
         this.load.image('buttonConnect', 'assets/connect.png');
-        this.load.image('avatar', 'assets/avatar.png');
         this.load.image('nuageShader', 'assets/nuage.png');
+
+        // Buttons Home
+        this.load.image('home-btnArena', 'assets/home/arena.png');
+        this.load.image('home-btnSummon', 'assets/home/summon.png');
+
         this.load.image('avatar', 'assets/avatar.png');
 
         // Buttons Home
@@ -28,10 +32,24 @@ class LoadingScreen extends Phaser.Scene {
         // Audio
         this.load.audio('titleBgMusic', ['./audio/mythologymusic.mp3']);
 
+        // Mint
+        this.load.image('invocation', 'assets/mint/invocation.png')
 
-       /* for (var i = 0; i < 150; i++) {
-            this.load.image('test'+i, 'assets/imageNFT.png');
-        }*/
+        // Inventory
+
+
+        this.load.image('cards_icon', 'assets/Icons/cards_icon.png');
+        this.load.image('magic_icon', 'assets/Icons/bagpack_icon.png');
+        this.load.image('backpack_icon', 'assets/Icons/magic_icon.png');
+        this.load.image('stats_icon', 'assets/Icons/stats_icon.png');
+        this.load.image('cart_icon', 'assets/Icons/cart_icon.png');
+        this.load.image('eth', 'assets/Icons/eth_icon.png');
+
+
+
+        /* for (var i = 0; i < 150; i++) {
+             this.load.image('test'+i, 'assets/imageNFT.png');
+         }*/
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -103,7 +121,6 @@ class LoadingScreen extends Phaser.Scene {
 
 
     create(){
-        console.log(this.cameras.main.width)
         // Changement de scene une fois le chargement terminé
         this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logo').setScale(0.3)
         this.buttonStart = this.add.text(this.cameras.main.width / 2.3, this.cameras.main.height / 1.4, 'Join the battle...').setScale(1.2).setInteractive();
@@ -116,7 +133,7 @@ class LoadingScreen extends Phaser.Scene {
         this.buttonStart.on('pointerdown', async () => {
             this.soundLogin = this.sound.play('titleBgMusic', {loop: true, volume:0.2});
             this.scene.start("SceneLogin");
-            //this.scene.start("SceneHome");
+            //this.scene.start("SceneMint");
         });
         // ajouter bouton join the battle
 

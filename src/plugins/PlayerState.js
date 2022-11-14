@@ -37,7 +37,6 @@ class Player extends Phaser.Plugins.BasePlugin {
         }
 
     }
-
     async loadWeb3() {
             await this.loadBlockchainData();
     }
@@ -89,7 +88,7 @@ class Player extends Phaser.Plugins.BasePlugin {
                 }
             }
         } catch (e) {
-            console.log(e);
+            console.log(e.message);
             window.alert('Unable to connect to your Argent X wallet. Please try again later');
         }
     }

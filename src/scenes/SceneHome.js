@@ -12,8 +12,9 @@ export default class SceneHome extends BaseScene
 
     }
 
+
     create(){
-       // Affichage des images
+       // Display images to scene
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
         this.buttonMint = this.add.sprite(this.cameras.main.width / 5, this.cameras.main.height / 1.6, 'home-btnSummon').setInteractive();
         this.buttonArena = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
@@ -23,9 +24,7 @@ export default class SceneHome extends BaseScene
         this.teamText = this.add.text(1312, 705, this.player.playerInfo.countNFT,{fontFamily: 'Arial', align: 'justify', fontSize: '40px', color: '0x000000'});
 
 
-
-
-        // liste de buttons afin d'appliquer des effets collectifs
+        // List of buttons to apply collective effects
         const buttons = [
             this.buttonMint,
             this.buttonArena,
@@ -36,7 +35,6 @@ export default class SceneHome extends BaseScene
             var scaleBase = button.scale
             button.on('pointerover', () => {
                 button.setScale(scaleBase + 0.005);
-                //this.sound.play('hoverEffect', { loop: false });
             });
 
             button.on('pointerout', () => {
@@ -64,19 +62,7 @@ export default class SceneHome extends BaseScene
             this.player.playerInfo.name,
             {fontFamily: 'Arial', align: 'justify', fontSize: '20px'})
 
-
-
-
-
-        // Stop scene testing
-        // this.time.delayedCall(1200, function(){
-        //     this.scene.stop();
-        // }, [], this)
-
-
     }
-
-
 
 
     update(){

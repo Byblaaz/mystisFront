@@ -44,6 +44,7 @@ class LoadingScreen extends Phaser.Scene {
         // Inventory
 
 
+        //Tests
         this.load.image('cards_icon', 'assets/Icons/cards_icon.png');
         this.load.image('magic_icon', 'assets/Icons/bagpack_icon.png');
         this.load.image('backpack_icon', 'assets/Icons/magic_icon.png');
@@ -51,11 +52,6 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('cart_icon', 'assets/Icons/cart_icon.png');
         this.load.image('eth', 'assets/Icons/eth_icon.png');
 
-
-
-        /* for (var i = 0; i < 150; i++) {
-             this.load.image('test'+i, 'assets/imageNFT.png');
-         }*/
 
         var progressBar = this.add.graphics();
         var progressBox = this.add.graphics();
@@ -69,9 +65,6 @@ class LoadingScreen extends Phaser.Scene {
 
 
         // Audio
-
-
-
         var loadingText = this.make.text({
             x: width / 2,
             y: height / 2 - 50,
@@ -127,10 +120,8 @@ class LoadingScreen extends Phaser.Scene {
 
 
     create(){
-        // Changement de scene une fois le chargement terminé
         this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'logo').setScale(0.3)
         this.buttonStart = this.add.text(this.cameras.main.width / 2.3, this.cameras.main.height / 1.4, 'Join the battle...').setScale(1.2).setInteractive();
-
 
         this.buttonStart.on('pointerup', () => {
             this.buttonStart.setAlpha(1);
@@ -141,8 +132,6 @@ class LoadingScreen extends Phaser.Scene {
             this.scene.start("SceneLogin");
             //this.scene.start("SceneMint");
         });
-        // ajouter bouton join the battle
-
     }
 }
 

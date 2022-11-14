@@ -3,16 +3,22 @@ import BaseScene from '../plugins/BaseScene';
 import { doc, setDoc } from "firebase/firestore";
 
 class TutorialScreen extends BaseScene {
+
     constructor() {
         super('TutorialScreen')
     }
+
+
     onlyLetters(str) {
         return /^[a-zA-Z]+$/.test(str);
     }
+
+
     preload() {
         this.load.html('nameform', 'assets/text/loginform.html');
         console.log(this.player.playerInfo)
     }
+
 
     create() {
 
@@ -26,7 +32,7 @@ class TutorialScreen extends BaseScene {
             if (event.target.name === 'EnterButton') {
                 var inputUsername = this.getChildByName('username');
 
-                //  TODO Add regex 
+                //  TODO Add regex
                 if (inputUsername.value !== '' && inputUsername.value.length > 3 && inputUsername.value.length < 10) {
                     if (/^[a-zA-Z]+$/.test(inputUsername.value)) {
                         //  Turn off the click events
@@ -43,7 +49,7 @@ class TutorialScreen extends BaseScene {
                         this.scene.player.playerInfo.isFirstTime = false;
                         this.scene.player.playerInfo.name = inputUsername.value;
                         await setDoc(doc(this.scene.player.users, this.scene.player.playerInfo.address), this.scene.player.playerInfo);
-                        this.scene.scene.start("SceneHome"); // si isFristTime , on start tutorial
+                        this.scene.scene.start("SceneHome"); // if isFristTime , on start tutorial
 
                     } else {
                         alert('Your username must have only letters')
@@ -55,21 +61,19 @@ class TutorialScreen extends BaseScene {
             }
         });
 
-        // animatio to display modal Username
+        // animation to display modal Username
         this.tweens.add({
             targets: element,
             y: 300,
             duration: 3000,
             ease: 'Power3'
         });
-
-
-
     }
+
 
     update() {
     }
-    
+
 }
 
 export default TutorialScreen;

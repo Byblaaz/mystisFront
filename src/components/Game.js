@@ -13,6 +13,7 @@ import RoundRectanglePlugin from "phaser3-rex-plugins/plugins/roundrectangle-plu
 import TextTypingPlugin from "phaser3-rex-plugins/plugins/texttyping-plugin";
 import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
 import CircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin";
+import AwaitLoaderPlugin from 'phaser3-rex-plugins/plugins/awaitloader-plugin.js';
 import SceneInventory from "../scenes/SceneInventory";
 
 
@@ -31,10 +32,10 @@ function Game() {
                 { key: 'rexTextTyping', plugin: TextTypingPlugin, start: true },
                 { key: 'rexInputTextPlugin', plugin: InputTextPlugin, start: true },
                 { key: 'rexCircleMaskImagePlugin', plugin: CircleMaskImagePlugin, start: true},
-
+                { key: 'rexAwaitLoader', plugin: AwaitLoaderPlugin, start: true},
             ],
             scene: [
-                { key: 'rexUI', plugin: UIPlugin, mapping: 'rexUI'}
+                { key: 'rexUI', plugin: UIPlugin, mapping: 'rexUI'},
             ]
         },
         scene: [

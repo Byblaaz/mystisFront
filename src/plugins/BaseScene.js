@@ -1,7 +1,6 @@
 import 'regenerator-runtime/runtime'
 import Phaser from 'phaser';
 
-
 class BaseScene extends Phaser.Scene {
 
     addImageToScene( x, y, nameImage, scaleBase) {
@@ -94,7 +93,6 @@ class BaseScene extends Phaser.Scene {
         })
             .showMessage(message)
     }
-
 
 }
 

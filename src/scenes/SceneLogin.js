@@ -1,5 +1,5 @@
 import BaseScene from '../plugins/BaseScene';
-import { doc, setDoc,updateDoc } from "firebase/firestore";
+import { doc, setDoc, updateDoc } from "firebase/firestore";
 
 export default class SceneLogin extends BaseScene
 {
@@ -7,8 +7,9 @@ export default class SceneLogin extends BaseScene
     constructor(){
         super('SceneLogin')
 
-
     }
+
+
     loadData = async () => {
         // Load Data from blockchain
         await this.player.loadWeb3()
@@ -18,8 +19,8 @@ export default class SceneLogin extends BaseScene
     preload(){
     }
 
+
     create(){
-        // Background changement taille en fonction de l'écran
         this.background = this.add.image(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundLogin').setScale(1)
 
         this.buttonConnect = this.add.sprite(this.cameras.main.width / 2, this.cameras.main.height / 1.4, 'buttonConnect').setScale(0.15).setInteractive();
@@ -37,7 +38,6 @@ export default class SceneLogin extends BaseScene
         this.buttonConnect.on('pointerup', () => {
             this.buttonConnect.setAlpha(1);
         });
-
 
         //Start Button
         this.buttonConnect.on('pointerdown', async () => {
@@ -71,8 +71,8 @@ export default class SceneLogin extends BaseScene
             if(this.player.playerInfo.address && this.player.playerInfo.isFirstTime){
                 console.log(this.player.playerInfo.address)
                 this.player.playerInfo.dateJoined = new Date();
-                // this.player.playerInfo.isFirstTime = false;
-                // await setDoc(doc(this.player.users, this.player.playerInfo.address), this.player.playerInfo);
+                this.player.playerInfo.isFirstTime = false;
+                await setDoc(doc(this.player.users, this.player.playerInfo.address), this.player.playerInfo);
                 this.scene.start("TutorialScreen"); // si isFristTime , on start tutorial
             }else{
                 this.player.playerInfo.lastLogin = new Date();
@@ -80,9 +80,7 @@ export default class SceneLogin extends BaseScene
                 await updateDoc(doc(this.player.users, this.player.playerInfo.address),{ lastLogin : this.player.playerInfo.lastLogin });
                 this.scene.start("SceneHome");
             }
-            
         });
-
     }
 
 

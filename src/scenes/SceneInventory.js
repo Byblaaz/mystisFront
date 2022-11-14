@@ -1,8 +1,11 @@
+import Phaser from 'phaser';
 import BaseScene from '../plugins/BaseScene';
 
 import { Tabs, ScrollablePanel, FixWidthSizer, OverlapSizer } from 'phaser3-rex-plugins/templates/ui/ui-components.js';
 
 const COLOR_LIGHT = 0x7b5e57;
+const COLOR_PRIMARY = 0x4e342e;
+const COLOR_DARK = 0x260e04;
 let scene;
 
 export default class SceneInventory extends BaseScene
@@ -15,8 +18,8 @@ export default class SceneInventory extends BaseScene
     async preload() {
 
         var scene = this
-        var test = await this.player.getMetaDataNft()
-        await test.forEach((item, index) => {
+        var metaDatas = await this.player.getMetaDataNft()
+        await metaDatas.forEach((item, index) => {
             //Check if image is already load
             console.log(this.textures.exists(item.edition))
             if (!this.textures.exists(item.edition))
@@ -39,10 +42,7 @@ export default class SceneInventory extends BaseScene
 
         // Background changement taille en fonction de l'écran
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
-        this.buttonHome = this.add.sprite(this.cameras.main.width / 50, this.cameras.main.height / 20, 'homeButton').setScale(0.3).setInteractive();
-
-        //this.canva = this.add.rectangle(this.cameras.main.width / 2, this.cameras.main.height / 2, 900, 600, 0x999999)
-        this.tabLeft = this.add.rectangle(this.cameras.main.width / 3.3, this.cameras.main.height / 2, 300, 570, 0x799999)
+        this.buttonHome = this.add.sprite(this.cameras.main.width / 50, this.cameras.main.height / 20, 'homeButton').setScale(0.1).setInteractive();
 
         //Details Box
         const detailsBox = this.add.rectangle(500, 87, this.cameras.main.width/2 + paddingX, this.cameras.main.height*0.745, 0x190000, 0.9).setOrigin(0);
@@ -51,7 +51,7 @@ export default class SceneInventory extends BaseScene
         console.log(detailsBox.y+ detailsBox.displayHeight - 1)
 
         this.detailsImage = this.add.sprite(
-            detailsBox.x + detailsBox.displayWidth/4,
+            detailsBox.x + detailsBox.displayWidth/4 - 20,
             400,
             `Alpha_alt`
         ).setOrigin(0.5,1).setInteractive();
@@ -80,6 +80,9 @@ export default class SceneInventory extends BaseScene
             'fire'
         ).setOrigin(1,0).setScale(0.35);
 
+        // Display attributes first NFT list
+        this.displayAttributs(0)
+        this.displayStat(25, 0, 100)
 
         this.sizerLeft = new FixWidthSizer(this, {
             space: {
@@ -91,7 +94,6 @@ export default class SceneInventory extends BaseScene
             }
         }).layout();
 
-        const COLOR_PRIMARY = 0x4e342e;
         await this.player.playerInfo.nftMetadata.forEach((item, index) => {
             this.sizerLeft.add(
                 this.rexUI.add.label({
@@ -106,6 +108,7 @@ export default class SceneInventory extends BaseScene
                     .setDepth(10)
                 .on('pointerdown', function () {
                     scene.setImageData(item);
+                    scene.displayAttributs(index)
                 })
 
             );
@@ -123,8 +126,8 @@ export default class SceneInventory extends BaseScene
 
 
         this.panelBox = new ScrollablePanel(this, {
-            x: this.cameras.main.width / 4,
-            y: this.cameras.main.height / 4,
+            x: 146,
+            y: 86,
             width: 300,
             height: 600,
             scrollMode: 0,
@@ -147,7 +150,8 @@ export default class SceneInventory extends BaseScene
         }).setOrigin(0).layout();
         this.add.existing(this.panelBox);
 
-        //Inventory Tabs
+        // Futur collection
+        /*//Inventory Tabs
         let tabs = new Tabs(this, {
             x: 150,
             y: 50,
@@ -155,9 +159,9 @@ export default class SceneInventory extends BaseScene
             height: 600,
             panel: this.panelBox,
             topButtons: [
-                this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x000000, 0.9).setOrigin(0.5, 1).setScale(0.8),
-                this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x23140a, 0.9).setOrigin(0.5, 1).setScale(0.8),
-                this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x23140a, 0.9).setOrigin(0.5, 1).setScale(0.8),
+                //this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x000000, 0.9).setOrigin(0.5, 1).setScale(0.8),
+                //this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x23140a, 0.9).setOrigin(0.5, 1).setScale(0.8),
+                //this.add.rectangle(0, 0, paddingX * 4, paddingX * 2.1, 0x23140a, 0.9).setOrigin(0.5, 1).setScale(0.8),
             ]
         }).setOrigin(0).layout();
 
@@ -165,11 +169,13 @@ export default class SceneInventory extends BaseScene
             tab.setStrokeStyle(2, 0x000000, 1);
             if (index == 0) {
                 this.cardIcon = this.add.sprite(tab.x, tab.y - tab.displayHeight / 2, 'cards_icon').setOrigin(0.5);
-            } else if (index == 1) {
+            }
+            // for next nft collection
+            /!*else if (index == 1) {
                 this.backpackIcon = this.add.sprite(tab.x, tab.y - tab.displayHeight / 2, 'backpack_icon').setOrigin(0.5);
             } else {
                 this.magicIcon = this.add.sprite(tab.x, tab.y - tab.displayHeight / 2, 'magic_icon').setOrigin(0.5);
-            }
+            }*!/
 
         });
 
@@ -225,7 +231,7 @@ export default class SceneInventory extends BaseScene
         });
 
         this.add.existing(tabs);
-
+*/
         const buttons = [
             this.buttonHome,
         ];
@@ -258,6 +264,93 @@ export default class SceneInventory extends BaseScene
         //this.rarity.setTexture(`rarity_${item.properties.rarity}`);
         //this.attribute.setTexture(item.properties.attribute);
     }
+
+    displayAttributs = (index) => {
+        var attributes = []
+
+        // Transform json to array
+        for(var i in this.player.playerInfo.nftMetadata[index].attributes)
+            attributes.push([i, this.player.playerInfo.nftMetadata[index].attributes[i]]);
+
+    function isOdd (n) {
+        if (Math.abs(n % 2) == 1) return true
+        else return false
+    }
+
+    var countCell = -1
+    var sizer = scene.rexUI.add.gridSizer({
+        x: 1020, y: 270,
+        width: 400, height: 100,
+        column: 2, row: Math.ceil(attributes.length / 2),
+        columnProportions: 1, rowProportions: 1,
+        space: {
+            //top: 30, bottom: 30, left: 10, right: 10,
+            column: 6, row: 20
+        },
+
+        createCellContainerCallback: function (scene, x, y, config) {
+            config.expand = true;
+            countCell += 1
+            if (isOdd(attributes.length) && config.column == 1 && config.row == Math.floor(attributes.length / 2))
+            {
+                return null;
+            }
+            else {
+                return scene.rexUI.add.label({
+                    background: scene.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
+                    text: scene.add.text(0, 0, attributes[countCell][1].trait_type + " : "+attributes[countCell][1].value,{fontSize: 15,fontFamily: 'Arial', align: 'justify'}),
+                    align: 'left',
+                    space: {
+                        left: 20,
+                        right: 20,
+                        top: 10,
+                        bottom: 10,
+                        icon: 10
+                    }
+                });
+            }
+        }
+    })
+        .layout()
+
+}
+
+    displayStat = (value, min, max) => {
+        var numberBar = this.rexUI.add.numberBar({
+            x: 650,
+            y: 450,
+            width: 250, // Fixed width
+
+            slider: {
+                // width: 120, // Fixed width
+                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
+                indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, '0xC70039'),
+                input: -1,
+            },
+
+            text: this.add.text(0, 0, '').setFixedSize(35, 0),
+
+            space: {
+                left: 10,
+                right: 10,
+                top: 10,
+                bottom: 10,
+
+                icon: 10,
+                slider: 10,
+            },
+
+            valuechangeCallback: function (value, oldValue, numberBar) {
+                numberBar.text = Math.round(Phaser.Math.Linear(0, 100, value));
+            },
+        })
+            .setDepth(10)
+            .layout();
+
+        numberBar.setValue(value, min, max);
+
+    }
+
 
      async create() {
     }

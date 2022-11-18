@@ -13,6 +13,8 @@ const MystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf
 
 // baseLink starkscan
 const starkscan = "https://testnet.starkscan.co/tx/"
+const baseUrlApi = "https://mytis-api.vercel.app/api/json/"
+
 
 class Player extends Phaser.Plugins.BasePlugin {
     constructor(pluginManager) {
@@ -140,11 +142,11 @@ class Player extends Phaser.Plugins.BasePlugin {
 
     getMetaDataNft = async () => {
         //TODO pour les test en local
-        const ids = [21, 22, 23, 24, 25];
+        const ids = [1,2, 3, 4, 5, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
         let metadataJson = []
 
         for (const id of ids) {
-            await fetch("assets/NftExy/json/"+id+".json")
+            await fetch(baseUrlApi+id)
                 .then(response => response.json())
                 .then(json => metadataJson.push(json));
         }

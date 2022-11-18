@@ -15,6 +15,7 @@ import InputTextPlugin from 'phaser3-rex-plugins/plugins/inputtext-plugin.js';
 import CircleMaskImagePlugin from "phaser3-rex-plugins/plugins/circlemaskimage-plugin";
 import AwaitLoaderPlugin from 'phaser3-rex-plugins/plugins/awaitloader-plugin.js';
 import SceneInventory from "../scenes/SceneInventory";
+import SceneArena from "../scenes/SceneArena";
 
 
 function Game() {
@@ -44,7 +45,8 @@ function Game() {
             SceneHome,
             SceneMint,
             TutorialScreen,
-            SceneInventory
+            SceneInventory,
+            SceneArena
         ],
         parent: 'game-content',
         dom: {

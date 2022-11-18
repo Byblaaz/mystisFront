@@ -18,6 +18,9 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('buttonConnect', 'assets/connect.png');
         this.load.image('avatar', 'assets/avatar.png');
         this.load.image('nuageShader', 'assets/nuage.png');
+        this.load.image('overlay', 'assets/home/overlay.png')
+        this.load.image('circleAvatar', 'assets/home/circleAvatar.png')
+        this.load.image('teamButton', 'assets/home/team.png')
 
         // Buttons Home
         this.load.image('home-btnArena', 'assets/home/arena.png');

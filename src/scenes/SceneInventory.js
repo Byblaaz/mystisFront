@@ -12,7 +12,7 @@ const COLOR_BLUE = 0x1C82FF;
 const COLOR_YELLOW = 0xFFC300;
 let scene;
 
-const baseApiImage = "https://mytis-api.vercel.app/api/images/";
+
 
 export default class SceneInventory extends BaseScene
 {
@@ -23,26 +23,22 @@ export default class SceneInventory extends BaseScene
 
     async preload() {
 
-        var scene = this
-        var metaDatas = await this.player.getMetaDataNft()
-        await metaDatas.forEach((item, index) => {
-            //Check if image is already load
-            if (!this.textures.exists(item.edition))
-                this.load.image(item.edition,baseApiImage + item.edition);
+        const scene = this
+
+        await this.LoadNftToScene(scene)
+        const IdsNft = this.player.playerInfo.idsNft
+        const lastImageLoad = IdsNft[IdsNft.length - 1]
+        this.load.once("filecomplete-image-"+lastImageLoad,async () => {
+            await this.mainFunction()
         })
-        //21
-        await this.load.start()
-        //this.load.start()
-
-        this.load.on('complete', function () {
-            console.log('complete');
-            scene.MainFunction()
-        });
-
+        // If images is already load
+        if (this.textures.exists(lastImageLoad)) {
+            await scene.mainFunction()
+        }
     }
 
     // Use custom function call after all textures is loaded
-    async MainFunction () {
+    async mainFunction () {
         scene = this
         const paddingX = 20
 
@@ -77,16 +73,13 @@ export default class SceneInventory extends BaseScene
             { fontFamily:'Arial', fontSize: 20, fontStyle: 'Bold Italic'}
         ).setOrigin(0);
 
-        this.life = this.displayStat(25, 0, 100, 650, 450, COLOR_RED)
-        this.energy = this.displayStat(15, 0, 100, 650, 480, COLOR_BLUE)
-        this.force = this.displayStat(21, 0, 100, 650, 510, COLOR_YELLOW)
-        this.speed = this.displayStat(21, 0, 100, 650, 540, COLOR_GREEN)
+        this.life = this.displayStat(25, 0, 100, 650, 450, COLOR_RED, 200)
+        this.energy = this.displayStat(15, 0, 100, 650, 480, COLOR_BLUE, 200)
+        this.force = this.displayStat(21, 0, 100, 650, 510, COLOR_YELLOW, 200)
+        this.speed = this.displayStat(21, 0, 100, 650, 540, COLOR_GREEN, 200)
 
         // Display attributes first NFT list
         this.displayAttributs(0)
-
-
-
 
         this.sizerLeft = new FixWidthSizer(this, {
             space: {
@@ -269,10 +262,7 @@ export default class SceneInventory extends BaseScene
 
         attributes = (this.player.playerInfo.nftMetadata[index].attributes.filter(a => !isInt(a.value)));
         statistics = (this.player.playerInfo.nftMetadata[index].attributes.filter(a => isInt(a.value)));
-        console.log(attributes)
-        console.log(statistics)
 
-         console.log(this.life)
          this.life.setValue(statistics[0].value, 0, 100)
          this.energy.setValue(statistics[1].value, 0, 100)
          this.force.setValue(statistics[2].value, 0, 100)
@@ -324,43 +314,6 @@ export default class SceneInventory extends BaseScene
         .layout()
 
 }
-
-    displayStat = (value, min, max, x , y, color) => {
-        let numberBar = this.rexUI.add.numberBar({
-            x: x,
-            y: y,
-            width: 200, // Fixed width
-
-            slider: {
-                // width: 120, // Fixed width
-                track: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, COLOR_PRIMARY),
-                indicator: this.rexUI.add.roundRectangle(0, 0, 0, 0, 10, color),
-                input: -1,
-            },
-
-            text: this.add.text(0, 0, '').setFixedSize(35, 0),
-
-            space: {
-                left: 10,
-                right: 10,
-                top: 10,
-                bottom: 10,
-
-                icon: 10,
-                slider: 10,
-            },
-
-            valuechangeCallback: function (value, oldValue, numberBar) {
-                numberBar.text = Math.round(Phaser.Math.Linear(0, max, value));
-            },
-        })
-            .setDepth(10)
-            .layout();
-
-        numberBar.setValue(value, min, max);
-
-        return numberBar;
-    }
 
 
      async create() {

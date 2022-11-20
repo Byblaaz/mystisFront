@@ -14,32 +14,32 @@ let scene;
 let selectedFigthter
 let animationCircle = false
 
+const baseApiImage = "https://mytis-api.vercel.app/api/images/";
 
-export default class SceneQueue extends BaseScene
+export default class SceneArena extends BaseScene
 {
     constructor(){
-        super('SceneQueue')
+        super('SceneArena')
     }
 
 
-    async preload() {
+   async preload() {
         scene = this
+        console.log(this.player.playerInfo.nftMetadata)
         await this.LoadImageNftToScene(this)
-        const IdsNft = this.player.playerInfo.idsNft
-        const lastImageLoad = IdsNft[IdsNft.length - 1]
-        this.load.once("filecomplete-image-"+lastImageLoad,async () => {
-            await this.mainFunction()
-        })
-        // If images is already load
-        if (this.textures.exists(lastImageLoad)) {
-            await scene.mainFunction()
-        }
+
+        this.load.on('complete', function () {
+            console.log('complete');
+            scene.mainFunction()
+        });
     }
 
     async mainFunction () {
+        console.log("coucou")
         this.background = this.add.rectangle(this.cameras.main.width / 2, this.cameras.main.height / 2, this.cameras.main.width, this.cameras.main.height, 0xEAEAEA)
 
         this.buttonHome = this.add.sprite(this.cameras.main.width / 50, this.cameras.main.height / 20, 'homeButton').setScale(0.1).setInteractive();
+
 
 
         this.infoNFT = this.add.rectangle(this.cameras.main.width / 4.5, this.cameras.main.height / 4 , 500, 300, 0x190000)
@@ -67,7 +67,7 @@ export default class SceneQueue extends BaseScene
         this.buttonCancelQueue.visible = false
 
 
-        this.sizerLeft1 = new FixWidthSizer(this, {
+        this.sizerLeft = new FixWidthSizer(this, {
             space: {
                 left: 5,
                 right: 5,
@@ -78,7 +78,7 @@ export default class SceneQueue extends BaseScene
         }).layout();
 
         await this.player.playerInfo.idsNft.forEach((item, index) => {
-            this.sizerLeft1.add(
+            this.sizerLeft.add(
                 this.rexUI.add.label({
                     background: this.rexUI.add.roundRectangle(0, 0, 2, 2, 20, COLOR_PRIMARY),
                     text: this.add.text(0, 0,"Edition "+item, { fontSize: 17 }),
@@ -104,9 +104,9 @@ export default class SceneQueue extends BaseScene
                 selectedFigthter = item
             }
         })
-        this.add.existing(this.sizerLeft1);
+        this.add.existing(this.sizerLeft);
 
-        this.panelBox1 = new ScrollablePanel(this, {
+        this.panelBox = new ScrollablePanel(this, {
             x: 66,
             y: 355,
             width: 500,
@@ -114,7 +114,7 @@ export default class SceneQueue extends BaseScene
             scrollMode: 0,
             background: this.add.rectangle(0, 0, 500, 400, 0x999000, 0.9),
             panel: {
-                child: this.sizerLeft1
+                child: this.sizerLeft
             },
             space: {
                 left: 5,
@@ -129,7 +129,7 @@ export default class SceneQueue extends BaseScene
                 position: 'right',
             },
         }).setOrigin(0).layout();
-        this.add.existing(this.panelBox1);
+        this.add.existing(this.panelBox);
 
 
         const buttons = [
@@ -138,7 +138,7 @@ export default class SceneQueue extends BaseScene
         ];
 
         buttons.forEach(button => {
-            var scaleBase = button.scale
+            const scaleBase = button.scale
             button.on('pointerover', () => {
                 button.setScale(scaleBase + 0.005);
             });
@@ -154,8 +154,6 @@ export default class SceneQueue extends BaseScene
 
         this.buttonHome.on('pointerdown', async () => {
             this.scene.start("SceneHome");
-            //this.scene.remove()
-            this.scene.stop("SceneQueue")
         })
 
         this.buttonQueue.on('pointerdown', async () => {
@@ -180,8 +178,11 @@ export default class SceneQueue extends BaseScene
         let statistics = []
 
         let data = await this.getMetaData(id)
+        console.log(data)
+
 
         statistics = (data.attributes.filter(a => isInt(a.value)));
+        console.log(statistics)
 
         this.attack.setValue(statistics[0].value, 0, 100)
         this.defense.setValue(statistics[1].value, 0, 100)
@@ -196,6 +197,7 @@ export default class SceneQueue extends BaseScene
     }
 
     enterQueue() {
+        console.log("coucou")
         this.buttonQueue.visible = false
         this.buttonCancelQueue.visible = true
         this.loading = this.add.image(1000, 650, "loading").setScale(0.05)
@@ -224,6 +226,9 @@ export default class SceneQueue extends BaseScene
         if (animationCircle) {
             this.loading.rotation += 0.04;
         }
+
+        //if (this.loading)
+        //this.loading.rotation += 0.01;
     }
 }
 

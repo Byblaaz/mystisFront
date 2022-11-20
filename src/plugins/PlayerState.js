@@ -9,7 +9,7 @@ import { app } from "../config/firebase-config"
 
 // Smart-Contract variables
 import mystisabi from "../abi/mystisabi.json"
-const MystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf8972faa35"
+const mystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf8972faa35"
 
 // baseLink starkscan
 const starkscan = "https://testnet.starkscan.co/tx/"
@@ -112,11 +112,11 @@ class Player extends Phaser.Plugins.BasePlugin {
     mintNFT = async (scene) => {
 
         let blockchainNFT = false;
-        const contract = new Contract(mystisabi, MystisAddress, this.playerBlockchainData.account);
+        const contract = new Contract(mystisabi, mystisAddress, this.playerBlockchainData.account);
         try {
 
             let tx = await contract.mint();
-            var modal = scene.ModalTxSuccess("current transaction \n tx : " + tx.transaction_hash.match(/.{1,10}/g)[0]+ "...")
+            const modal = scene.ModalTxSuccess("current transaction \n tx : " + tx.transaction_hash.match(/.{1,10}/g)[0]+ "...")
             blockchainNFT = true
             modal.on('pointerdown', async () => {
                 openExternalLink(tx.transaction_hash)
@@ -130,7 +130,7 @@ class Player extends Phaser.Plugins.BasePlugin {
 
     getCounterNft  = async(address) =>{
         let blockchainNfts = [];
-        const contract = new Contract(mystisabi, MystisAddress, this.playerBlockchainData.account);
+        const contract = new Contract(mystisabi, mystisAddress, this.playerBlockchainData.account);
 
         try {
             let nbNFTMint = await contract.balanceOf(address);
@@ -161,8 +161,8 @@ class Player extends Phaser.Plugins.BasePlugin {
 
 function openExternalLink (hash)
 {
-    var url = starkscan + encodeURIComponent(hash);
-    var link = window.open(url, '_blank');
+    const url = starkscan + encodeURIComponent(hash);
+    const link = window.open(url, '_blank');
 
     if (link && link.focus)
     {

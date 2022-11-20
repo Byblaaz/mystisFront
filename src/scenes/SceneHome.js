@@ -9,7 +9,7 @@ export default class SceneHome extends BaseScene
 
 
     preload(){
-
+        console.log("START SCENE")
     }
 
 
@@ -17,7 +17,7 @@ export default class SceneHome extends BaseScene
        // Display images to scene
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
         this.buttonMint = this.add.sprite(this.cameras.main.width / 5, this.cameras.main.height / 1.6, 'home-btnSummon').setInteractive();
-        this.buttonArena = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
+        this.buttonQueue = this.add.sprite(this.cameras.main.width / 1.45, this.cameras.main.height / 1.65, 'home-btnArena').setInteractive();
         this.shader = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'nuageShader', 0);
         this.overlay = this.add.image(130, 60, 'overlay').setScale(0.5)
         this.overlayCircle = this.add.image(55, 60, 'circleAvatar').setScale(0.5)
@@ -32,7 +32,7 @@ export default class SceneHome extends BaseScene
         // List of buttons to apply collective effects
         const buttons = [
             this.buttonMint,
-            this.buttonArena,
+            this.buttonQueue,
             this.team
         ];
 
@@ -67,8 +67,8 @@ export default class SceneHome extends BaseScene
             this.scene.start("SceneInventory");
         });
 
-        this.buttonArena.on('pointerdown', async () => {
-            this.scene.start("SceneArena");
+        this.buttonQueue.on('pointerdown', async () => {
+            this.scene.start("SceneQueue");
         });
 
         //const overlayPlayer = this.add.rectangle(215, 60, 300, 70, 0x999999, 0.9)

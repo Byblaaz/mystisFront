@@ -42,7 +42,6 @@ export default class SceneInventory extends BaseScene
         scene = this
         const paddingX = 20
 
-        // Background changement taille en fonction de l'écran
         this.background = this.addImageToScene(this.cameras.main.width / 2, this.cameras.main.height / 2, 'backgroundHome', 0);
         this.buttonHome = this.add.sprite(this.cameras.main.width / 50, this.cameras.main.height / 20, 'homeButton').setScale(0.1).setInteractive();
 

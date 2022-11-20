@@ -21,6 +21,7 @@ class LoadingScreen extends Phaser.Scene {
         this.load.image('overlay', 'assets/home/overlay.png')
         this.load.image('circleAvatar', 'assets/home/circleAvatar.png')
         this.load.image('teamButton', 'assets/home/team.png')
+        this.load.image('loading', 'assets/circle.png')
 
         // Buttons Home
         this.load.image('home-btnArena', 'assets/home/arena.png');

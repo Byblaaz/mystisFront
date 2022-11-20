@@ -13,7 +13,9 @@ const MystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf
 
 // baseLink starkscan
 const starkscan = "https://testnet.starkscan.co/tx/"
-const baseUrlApi = "https://mytis-api.vercel.app/api/json/"
+const baseUrlApi = "https://mytis-api.vercel.app/api/"
+//const baseUrlApi = "http://localhost:3000/api/"
+const pathJson = "json/"
 
 
 class Player extends Phaser.Plugins.BasePlugin {
@@ -32,7 +34,8 @@ class Player extends Phaser.Plugins.BasePlugin {
             isFirstTime: true,
             dateJoined: null,
             countNFT: 0,
-            nftMetadata: []
+            nftMetadata: [],
+            idsNft: []
         }
         this.playerBlockchainData = {
             account: '',
@@ -73,7 +76,8 @@ class Player extends Phaser.Plugins.BasePlugin {
                         const { isFirstTime, name,lastLogin, dateJoined, } = user.data();
                         console.log("address starknet "+windowStarknet.selectedAddress)
                         this.playerBlockchainData.account = windowStarknet.account
-                        this.setPlayerInfo(name, windowStarknet.selectedAddress, isFirstTime, lastLogin.toDate(), dateJoined.toDate());
+                        const ids = [1,2, 3, 4, 5, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
+                        this.setPlayerInfo(name, windowStarknet.selectedAddress, isFirstTime, lastLogin.toDate(), dateJoined.toDate(), ids);
 
                         // Call sc get info
                         await this.getCounterNft(windowStarknet.selectedAddress);
@@ -94,12 +98,13 @@ class Player extends Phaser.Plugins.BasePlugin {
             window.alert('Unable to connect to your Argent X wallet. Please try again later');
         }
     }
-    setPlayerInfo(name, address,isFirstTime, account,lastLogin){
+    setPlayerInfo(name, address,isFirstTime, account,lastLogin, idsNft){
         this.playerInfo = {
             name,
             address,
             lastLogin,
             isFirstTime,
+            idsNft
         }
         console.log('Player Info Set :',this.playerInfo);
     }
@@ -140,13 +145,10 @@ class Player extends Phaser.Plugins.BasePlugin {
         return blockchainNfts;
     }
 
-    getMetaDataNft = async () => {
-        //TODO pour les test en local
-        const ids = [1,2, 3, 4, 5, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32];
+    getAllMetaData = async () => {
         let metadataJson = []
-
-        for (const id of ids) {
-            await fetch(baseUrlApi+id)
+        for await(const id of this.playerInfo.idsNft) {
+            await fetch(baseUrlApi+pathJson+id)
                 .then(response => response.json())
                 .then(json => metadataJson.push(json));
         }
@@ -154,6 +156,7 @@ class Player extends Phaser.Plugins.BasePlugin {
         this.playerInfo.nftMetadata = metadataJson
         return metadataJson
     }
+
 }
 
 function openExternalLink (hash)

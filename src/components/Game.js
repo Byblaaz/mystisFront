@@ -47,7 +47,8 @@ function Game() {
             SceneMint,
             TutorialScreen,
             SceneInventory,
-            SceneQueue
+            SceneQueue,
+            SceneArena
         ],
         parent: 'game-content',
         dom: {

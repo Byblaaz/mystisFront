@@ -202,7 +202,7 @@ export default class SceneQueue extends BaseScene
         animationCircle = true
         setTimeout(function () {
             if (animationCircle)
-            console.log('Hello world')
+                scene.scene.start("SceneArena", {nftA : selectedFigthter, nftB : {idNft : 20, image : "test/20"}});
         }, 3000)
 
     }

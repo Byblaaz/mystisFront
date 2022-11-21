@@ -9,7 +9,7 @@ import { app } from "../config/firebase-config"
 
 // Smart-Contract variables
 import mystisabi from "../abi/mystisabi.json"
-const mystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf8972faa35"
+const MystisAddress = "0x018743ab8fd75ed0fcfe5581aca191bc166f0997cb9851710679adf8972faa35"
 
 // baseLink starkscan
 const starkscan = "https://testnet.starkscan.co/tx/"
@@ -112,7 +112,7 @@ class Player extends Phaser.Plugins.BasePlugin {
     mintNFT = async (scene) => {
 
         let blockchainNFT = false;
-        const contract = new Contract(mystisabi, mystisAddress, this.playerBlockchainData.account);
+        const contract = new Contract(mystisabi, MystisAddress, this.playerBlockchainData.account);
         try {
 
             let tx = await contract.mint();
@@ -130,7 +130,7 @@ class Player extends Phaser.Plugins.BasePlugin {
 
     getCounterNft  = async(address) =>{
         let blockchainNfts = [];
-        const contract = new Contract(mystisabi, mystisAddress, this.playerBlockchainData.account);
+        const contract = new Contract(mystisabi, MystisAddress, this.playerBlockchainData.account);
 
         try {
             let nbNFTMint = await contract.balanceOf(address);
